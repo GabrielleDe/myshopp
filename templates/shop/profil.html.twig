@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Profil {% endblock %}
+
+{% block body %}
+        <h1>Mon profil</h1>
+
+           <th scope="row"></th>
+            <h5 class="card-header">{{app.user.pseudo}}, Vos informations:</h5>
+            <div class="metadata">
+            <br>
+            <p class="card-text">Nom: {{app.user.nom}}</p>
+            <br>
+            <p class="card-text">Prenom: {{app.user.prenom}}</p>
+            <br>
+            <p class="card-text">Email: {{app.user.Email}}</p>
+            <br>
+            <p class="card-text">Civilite: {{app.user.civilite}}</p>
+            <br>
+            <a href="{{ path('app_login') }}" class="btn btn-success">Gérer mon profil</a>
+            <br>
+            <br>    
+
+        <h2>Mes commandes</h2>
+    {% for commande in commandes %}
+    {# {% if commande.membres == app.user.id %} #}
+    <div class="card border-success mb-3" style="max-width: 80vw;">
+            <div class="card-header"><h3>Commande du {{commande.dateEnregistrement|date("d/m/y à H:i:s")}}</h3></div>
+            <div class="card-body">
+                <h4 class="card-title">{{commande.produits.titre}}</h4>
+                
+                <p class="card-text">
+                T'en as commandé : {{commande.quantite}}
+                <br>
+                Ta commande est : {{commande.etat}}
+                <h5>Prix Total : {{ commande.montant }}€</h5>               
+                </p>
+            </div>
+        </div>
+
+    {# {% endif %} #}
+        
+    {% endfor %}
+   
+    
+
+{% endblock %}

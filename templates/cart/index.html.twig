@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CartController!{% endblock %}
+
+{% block body %}
+
+<h1 class="text-center">Votre Panier</h1>
+    
+{% if items %}
+    {# si j'ai des produits dans le panier j'affiche son contenue #}
+    <div class="container-fluid">
+    <table class="table container">
+        <thead>
+            <tr>
+                <th>Produit</th>
+                <th>Prix</th>
+                <th>Quantité</th>
+                <th>Total</th>
+                <th>Actions</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        
+            {% for item in items %}
+                <tr>
+                    <td> {{ item.produits.titre }} </td>
+                    <td> {{ item.produits.prix }} €</td>
+                    <td> {{ item.quantite }} </td>
+                    <br>
+                    <td> {{item.produits.prix * item.quantite}} €</td>
+                    <td> 
+                    <a href="{{ path('cart_add', {id:item.produits.id}) }}" class="btn-sm btn-success mt-2"><i class="fa fa-solid fa-plus" ></i>
+                    <a href=" {{ path('cart_remove', {id:item.produits.id}) }}" class="btn-sm btn-danger mt-2"> <i class="fa fa-trash"></i></a> 
+                    </td>
+                </tr>
+            {% endfor %}
+            
+        </tbody>
+        <tfoot>
+
+            <tr>
+                <td colspan="3" class="text-end">Total :</td>
+                <td>{{ total }}€</td>
+             </tr>
+
+        </tfoot>
+        
+
+        
+    </table>
+    {% if app.user %} 
+        <a class="btn btn-success" href="{{ path('app_commandes') }}">Passer la comande</a>
+    </div>
+    {% else %}
+        <a class="btn btn-success" href="{{ path('app_login') }}">Se connecter</a>
+    {% endif %}
+{% else %}
+
+    <p> Votre panier est vide </p>
+
+{% endif %}
+{% endblock %}

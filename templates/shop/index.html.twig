@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ShopController!{% endblock %}
+
+{% block body %}
+<div class="example-wrapper">
+    <h1>Hey You  </h1>
+    Amuse toi et claque un max de fric 
+    </div>
+
+    <section class="row articles">
+    
+    {% for produit in Produits %}
+        
+             {% if produit.stock > 0 %}
+        
+        <div class="card col-md-3 m-3 p-2" >
+            <img class="img-fluid" src="{{produit.photo}}" alt="">
+            <div >
+                <h5 class="card-title">{{produit.titre}}</h5>
+                <div class="metadata">
+                {{ produit.couleur }}
+                <br>
+                {{ produit.taille }}
+                <br>
+                {{ produit.prix }}
+                <br>
+                {{ produit.stock }}
+                Publié le 
+                 {{produit.DateEnregistrement|date('d/m/Y à H:i:s')}}
+                </div>
+                <p class="card-text">{{ produit.description|raw}}</p>
+                 <a href="{{ path('cart_add', {id:produit.id}) }}" class="btn btn-primary">Ajouter au Panier</a>  
+            </div>
+        </div>
+       {% endif %}
+     {% endfor %}
+    </section>
+{% endblock %}
