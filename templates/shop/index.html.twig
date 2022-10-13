@@ -19,13 +19,13 @@
             <div >
                 <h5 class="card-title">{{produit.titre}}</h5>
                 <div class="metadata">
-                {{ produit.couleur }}
+                Couleur :{{ produit.couleur }}
                 <br>
-                {{ produit.taille }}
+                Taille :{{ produit.taille }}
                 <br>
-                {{ produit.prix }}
+                Prix :{{ produit.prix }}€
                 <br>
-                {{ produit.stock }}
+                Il en reste :{{ produit.stock }}
                 Publié le 
                  {{produit.DateEnregistrement|date('d/m/Y à H:i:s')}}
                 </div>
